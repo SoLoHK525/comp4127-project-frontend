@@ -9,7 +9,7 @@ export const ApiConfig = {
 }
 
 export const request = axios.create({
-    baseURL: "http://localhost:5123"
+    baseURL: "/"
 })
 
 const signHeaders = (headers: {
@@ -55,8 +55,6 @@ request.interceptors.request.use(async (request) => {
             const headers = _.pick(request.headers, ["Authorization", "Trace-Id", "X-Request-Time", "Digest"]) as { [key: string]: string }
             request.headers["Signature"] = signHeaders(headers, ApiConfig.signingKey);
         }
-
-        request.headers["key"] = ApiConfig.signingKey;
     }
 
     return request;
